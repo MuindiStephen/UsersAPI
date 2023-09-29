@@ -1,11 +1,10 @@
 package com.stevemd.demoapi.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.security.Timestamp;
 
 @Getter
@@ -14,12 +13,15 @@ import java.security.Timestamp;
 @Table(name = "users")
 public class User {
 
-    // Object Relational Mapping
-    @Column(name = "id", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -30,7 +32,6 @@ public class User {
     @Column(name = "created_at",nullable = false)
     private Timestamp createdAt;
 
-    @Column(name = "updated_at",nullable = false)
+    @Column(name = "updated_at",nullable = true)
     private Timestamp updatedAt;
-
 }
