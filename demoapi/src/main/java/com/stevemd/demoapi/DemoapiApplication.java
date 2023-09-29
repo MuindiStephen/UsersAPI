@@ -14,10 +14,8 @@ public class DemoapiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoapiApplication.class, args);
 	}
-
 	@GetMapping("/hello")
 	public String hello() {
 		return "Hello Spring boot and status is "+HttpURLConnection.HTTP_OK;
 	}
-
 }
