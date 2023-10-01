@@ -1,9 +1,12 @@
 package com.stevemd.demoapi.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "users")

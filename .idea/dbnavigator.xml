@@ -12,7 +12,7 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="35984526-459a-4cbd-adf6-483f2c2843df">
+    <connection id="52a22d12-ea50-4c91-b074-beee7985a543">
       <console name="users@connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
@@ -39,7 +39,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="35984526-459a-4cbd-adf6-483f2c2843df" active="true" signed="true">
+      <connection id="52a22d12-ea50-4c91-b074-beee7985a543" active="true" signed="true">
         <database>
           <name value="users@connection" />
           <description value="" />
