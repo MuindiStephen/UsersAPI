@@ -1,7 +1,26 @@
 package com.stevemd.demoapi.entity;
 
+import lombok.Getter;
+
+import javax.persistence.*;
+
+@Getter
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
     private Long id;
+
+    @Column(name = "name")
     private String name;
     private String email;
     private String password;
@@ -11,22 +30,6 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setId(Long id) {
