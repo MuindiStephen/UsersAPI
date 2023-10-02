@@ -2,12 +2,14 @@ package com.stevemd.demoapi.config;
 
 import com.stevemd.demoapi.entity.User;
 import com.stevemd.demoapi.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+@Slf4j
 @Configuration
 public class UserConfig {
 
@@ -32,14 +34,33 @@ public class UserConfig {
                       "5678"
               );
 
-              userRepository.save(muindi);
-              userRepository.save(mirriam);
+              User alex = new User(
+                      3L,
+                      "alex",
+                      "alex@gmail.com",
+                      "5678"
+              );
 
+              User john = new User(
+                      4L,
+                      "john",
+                      "john@gmail.com",
+                      "5678"
+              );
+
+
+              userRepository.saveAll(
+                      List.of(muindi,mirriam,alex,john)
+              );
+
+              log.info("-----Success:------- ");
               System.out.println("Users saved successfully.");
+
           }catch (Exception e) {
 
               e.printStackTrace();
               System.err.println("Error while saving users: " + e.getMessage());
+              log.error("An error occurred",e);
           }
 
         };
