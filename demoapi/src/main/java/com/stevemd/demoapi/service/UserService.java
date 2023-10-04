@@ -3,11 +3,14 @@ package com.stevemd.demoapi.service;
 import com.stevemd.demoapi.entity.User;
 import com.stevemd.demoapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -25,8 +28,23 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void addNewUser(User user) {
+    public ResponseEntity<String> addNewUser(User user) {
+
+        Optional<User> userByEmail =
+                userRepository.findByEmail(user.getEmail());
+
+        if (userByEmail.isPresent()) {
+           //throw new IllegalStateException("Email is already in use by another account");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("email taken");
+
+        }
+
+        userRepository.save(user);
+
         System.out.println("Created a new user: "+user);
+
         log.info(String.valueOf(HttpStatus.CREATED));
+        return null;
     }
 }

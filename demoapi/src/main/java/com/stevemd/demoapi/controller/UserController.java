@@ -4,11 +4,13 @@ package com.stevemd.demoapi.controller;
 import com.stevemd.demoapi.entity.User;
 import com.stevemd.demoapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Controller
 @RequestMapping(path = "/api/v1/users")
 public class UserController {
 
