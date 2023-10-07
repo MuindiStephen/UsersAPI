@@ -12,7 +12,6 @@ import java.util.List;
 @Slf4j
 @Configuration
 public class UserConfig {
-
     @Bean
     CommandLineRunner commandLineRunner(
             UserRepository userRepository
@@ -53,17 +52,13 @@ public class UserConfig {
                       List.of(muindi,mirriam,alex,john)
               );
 
-              log.info("-----Success:------- ");
-              System.out.println("Users saved successfully.");
+              log.info("\n-----Success:------- ");
+              System.out.println("Users saved successfully");
 
           }catch (Exception e) {
-
-              e.printStackTrace();
               System.err.println("Error while saving users: " + e.getMessage());
               log.error("An error occurred",e);
           }
-
         };
-
     }
 }

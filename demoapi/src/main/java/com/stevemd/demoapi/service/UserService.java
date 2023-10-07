@@ -3,12 +3,12 @@ package com.stevemd.demoapi.service;
 import com.stevemd.demoapi.entity.User;
 import com.stevemd.demoapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Id;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,15 +28,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public ResponseEntity<String> addNewUser(User user) {
+    public void addNewUser(User user) {
 
         Optional<User> userByEmail =
                 userRepository.findByEmail(user.getEmail());
 
         if (userByEmail.isPresent()) {
-           //throw new IllegalStateException("Email is already in use by another account");
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("email taken");
+            throw new IllegalStateException("Email is already in use by another account");
 
         }
 
@@ -45,6 +43,13 @@ public class UserService {
         System.out.println("Created a new user: "+user);
 
         log.info(String.valueOf(HttpStatus.CREATED));
-        return null;
+    }
+
+    public void deleteUser(Long userId) {
+       boolean exists = userRepository.existsById(userId);
+       if (!exists) {
+           throw new IllegalStateException("User with id:"+userId+" does not exist.");
+       }
+       userRepository.deleteById(userId);
     }
 }

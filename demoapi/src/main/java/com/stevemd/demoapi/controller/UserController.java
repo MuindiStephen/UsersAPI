@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @Controller
-@RequestMapping(path = "/api/v1/users")
+@RequestMapping(path = "/api/v1/users/")
 public class UserController {
 
 
@@ -27,8 +27,15 @@ public class UserController {
        return userService.users();
    }
 
-   @PostMapping(path = "/register")
+   @PostMapping(path = "register")
     public void registerNewUser(@RequestBody User user) {
        userService.addNewUser(user);
+   }
+
+   @DeleteMapping(path = "{userId}")
+    public void deleteUser(
+            @PathVariable ("userId") Long userId
+   ) {
+       userService.deleteUser(userId);
    }
 }
