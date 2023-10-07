@@ -5,11 +5,11 @@ import com.stevemd.demoapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -51,5 +51,28 @@ public class UserService {
            throw new IllegalStateException("User with id:"+userId+" does not exist.");
        }
        userRepository.deleteById(userId);
+    }
+
+    @Transactional
+    public void updateUser(Long userId,String name,String email) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new IllegalStateException(
+                        "User with id: "+userId+" does not exist."
+                ));
+
+        if (name!=null && !name.isEmpty() && !Objects.equals(user.getName(),name)){
+            user.setName(name);
+
+        }
+        if (email!=null && !email.isEmpty() && !Objects.equals(user.getEmail(),email)){
+
+            Optional <User> userUpdate = userRepository.findByEmail(email);
+
+            if (userUpdate.isPresent()) {
+                throw new IllegalStateException("Email is already in use by another account.");
+            }
+            user.setEmail(email);
+        }
     }
 }
